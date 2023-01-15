@@ -1,20 +1,16 @@
 import CircularProgress from "./components/circulateProgress";
 import React, { useState } from "react";
-//import { makeStyles } from "@material-ui/core/styles";
 import {
   TextField,
-  Select,
   MenuItem,
   FormControl,
-  InputLabel,
   Typography,
   Button,
   Box
 } from "@material-ui/core";
-import "./styles.css";
+
 
 export default function App() {
-  //const classes = useStyles();
   const [gender, setGender] = useState("");
   const [weight, setWeight] = useState(80);
   const [height, setHeight] = useState(183);
@@ -48,7 +44,7 @@ export default function App() {
   };
 
   if (isCalculator || isBarProgress) {
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: any) => {
       event.preventDefault();
       setIsCalculator(false);
       setIsBarProgress(true);
@@ -111,27 +107,19 @@ export default function App() {
                     }}
                   >
                     <div style={{ minWidth: "220px" }}>
-                      <FormControl
-                        fullWidth
-                        style={{
-                          //marginRight: "25px",
-                          marginTop: "16px",
-                          marginBottom: "8px"
-                        }}
-                        variant="outlined"
+                      <FormControl 
+                      fullWidth
                       >
-                        <InputLabel id="gender-select-label">
-                          Gênero*
-                        </InputLabel>
-                        <Select
-                          labelId="gender-select-label"
-                          id="gender-select"
-                          value={gender}
-                          onChange={(event) => setGender(event.target.value)}
+                        <TextField
+                          variant="outlined"
+                          value={gender }
+                          onChange={(event) => setGender(event.target.value as any)}
+                          select
+                          label="Gênero"
                         >
                           <MenuItem value="male">Masculino</MenuItem>
                           <MenuItem value="female">Feminino</MenuItem>
-                        </Select>
+                        </TextField>
                       </FormControl>
                     </div>
 
@@ -140,10 +128,10 @@ export default function App() {
                         label="Peso (kg)"
                         type="number"
                         value={weight}
-                        onChange={(event) => setWeight(event.target.value)}
+                        onChange={(event) => setWeight(event.target.value as any)}
                         variant="outlined"
                         margin="normal"
-                        required="true"
+                        required
                         fullWidth
                       />
                     </div>
@@ -164,11 +152,11 @@ export default function App() {
                         label="Altura (cm)"
                         type="number"
                         value={height}
-                        onChange={(event) => setHeight(event.target.value)}
+                        onChange={(event) => setHeight(event.target.value as any)}
                         variant="outlined"
                         margin="normal"
                         fullWidth
-                        required="true"
+                        required
                         //style={{ marginRight: "25px" }}
                       />
                     </div>
@@ -178,10 +166,10 @@ export default function App() {
                         label="Idade"
                         type="number"
                         value={age}
-                        onChange={(event) => setAge(event.target.value)}
+                        onChange={(event) => setAge(event.target.value as any)}
                         variant="outlined"
                         margin="normal"
-                        required="true"
+                        required
                         fullWidth
                       />
                     </div>
@@ -202,35 +190,34 @@ export default function App() {
                         style={{ marginRight: "25px", marginBottom: "15px" }}
                         variant="outlined"
                       >
-                        <InputLabel id="goal-select-label">Objetivo</InputLabel>
-                        <Select
-                          labelId="goal-select-label"
-                          id="goal-select"
+                        <TextField
+                          variant="outlined"
                           value={goal}
                           onChange={(event) => setGoal(event.target.value)}
+                          select
+                          label="Objetivo"
                         >
                           <MenuItem value="masculino">Masculino</MenuItem>
                           <MenuItem value="feminino">Feminino</MenuItem>
-                        </Select>
+                        </TextField>
                       </FormControl>
                     </div>
 
                     <div style={{ minWidth: "220px" }}>
                       <FormControl fullWidth variant="outlined">
-                        <InputLabel id="active-select-label">
-                          Nível de Atividade Física
-                        </InputLabel>
-                        <Select
-                          labelId="active-select-label"
-                          id="active-select"
+                      <TextField
+                          variant="outlined"
                           value={active}
-                          onChange={(event) => setActive(event.target.value)}
+                          onChange={(event) => setActive(event.target.value as any)}
+                          select
+                          label="Nível de Atividade Física"
                         >
+        
                           <MenuItem value="Sedentário">Sedentário</MenuItem>
                           <MenuItem value="Levemente Ativo">
                             Levemente Ativo
                           </MenuItem>
-                        </Select>
+                        </TextField>
                       </FormControl>
                     </div>
                     <Button
@@ -255,6 +242,7 @@ export default function App() {
       </>
     );
   }
+
   if (IsResult) {
     return (
       <>
@@ -312,7 +300,7 @@ export default function App() {
                     label="Taxa Metabólica Basal"
                     type="number"
                     value={calculateTaxa()}
-                    onChange={(event) => setHeight(event.target.value)}
+                    onChange={(event) => setHeight(event.target.value as any)}
                     variant="outlined"
                     margin="normal"
                     disabled={true}
@@ -326,7 +314,7 @@ export default function App() {
                     label="TDEE"
                     type="number"
                     value={calculateTDEE()}
-                    onChange={(event) => setAge(event.target.value)}
+                    onChange={(event) => setAge(event.target.value as any)}
                     disabled={true}
                     variant="outlined"
                     margin="normal"
@@ -340,7 +328,7 @@ export default function App() {
                     label="IMC"
                     type="number"
                     value={calculateIMC()}
-                    onChange={(event) => setAge(event.target.value)}
+                    onChange={(event) => setAge(event.target.value as any)}
                     disabled={true}
                     variant="outlined"
                     margin="normal"
@@ -353,7 +341,7 @@ export default function App() {
                     label="Peso Ideal"
                     type="number"
                     value={calculatePesoIdeal()}
-                    onChange={(event) => setAge(event.target.value)}
+                    onChange={(event) => setAge(event.target.value as any)}
                     disabled={true}
                     variant="outlined"
                     margin="normal"
@@ -378,4 +366,6 @@ export default function App() {
       </>
     );
   }
+
+  return <></>
 }
