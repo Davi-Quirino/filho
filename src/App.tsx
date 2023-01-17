@@ -6,50 +6,69 @@ import {
   FormControl,
   Typography,
   Button,
-  Box
 } from "@material-ui/core";
+import logo from "./assets/logo.png"
 
 
 export default function App() {
   const [gender, setGender] = useState("");
-  const [weight, setWeight] = useState(80);
-  const [height, setHeight] = useState(183);
-  const [age, setAge] = useState(25);
+  const [weight, setWeight] = useState();
+  const [height, setHeight] = useState();
+  const [age, setAge] = useState();
   const [goal, setGoal] = useState("");
   const [active, setActive] = useState("");
   const [isCalculator, setIsCalculator] = useState(true);
   const [isBarProgress, setIsBarProgress] = useState(false);
   const [IsResult, setIsResult] = useState(false);
+  const [comment, setComment] = useState("")
 
   const calculateTaxa = () => {
+    if(weight === undefined || height === undefined || age === undefined) return 
     if (gender === "male") {
-      return (66 + 13.8 * weight + 5 * height - 6.8 * age).toFixed(2);
+      return (66 + 13.8 * weight + 5 * height - 6.8 * age).toFixed(0);
     } else {
-      return (665 + 9.6 * weight + 1.8 * height - 4.7 * age).toFixed(2);
+      return (665 + 9.6 * weight + 1.8 * height - 4.7 * age).toFixed(0);
     }
   };
 
   const calculateIMC = () => {
-    return ((weight / (height * height)) * 10000).toFixed(2);
+    if(weight === undefined || height === undefined) return 
+    return ((weight / (height * height)) * 10000).toFixed(1);
   };
 
   const calculatePesoIdeal = () => {
+    if(height === undefined) return
     //PI = IMC desejado x (Altura x Altura)
     return ((23 * (height * height)) / 10000).toFixed(2);
   };
   const calculateTDEE = () => {
+    if(weight === undefined || height === undefined || age === undefined) return 
     //TMB = 10 * (peso) + 6.25 * (altura) – 5 * (idade) – 161
     //TDEE = TMB * nível de atividade física
-    return ((10 * weight + 6.25 * height - 5 * age) * 1.375).toFixed(2);
+    return ((10 * weight + 6.25 * height - 5 * age) * 1.375).toFixed(0);
   };
 
   if (isCalculator || isBarProgress) {
     const handleSubmit = (event: any) => {
       event.preventDefault();
+      if(gender === "") {
+        setComment("Você precisa colocar o seu gênero")
+        return
+      }
+      if(!weight || weight <= 0 ) {
+        setComment("Você precisa colocar o seu peso")
+        return
+      }
+      if(!height || height <= 0) {
+        setComment("Você precisa colocar a sua altura")
+        return
+      }
+      if(!age || age <= 0) {
+        setComment("Você precisa colocar a sua idade")
+        return
+      }
       setIsCalculator(false);
       setIsBarProgress(true);
-      console.log("bar", isBarProgress);
-      console.log("resut", IsResult);
       setTimeout(() => (setIsBarProgress(false), setIsResult(true)), 5700);
     };
 
@@ -63,28 +82,46 @@ export default function App() {
             textAlign: "center"
           }}
         >
+        <Typography
+          variant="h6"
+          style={{
+            display: "flex",
+            height: "150px",        
+          }}
+          gutterBottom
+        >
+          <img src={logo} alt="logo" style={{height:"100%"}}/>
+        </Typography>
           <Typography
             style={{ display: "flex", justifyContent: "center" }}
             variant="h5"
             gutterBottom
           >
-            Parabéns pelo investimento!
+            Parabéns pela decisão de entrar para o Protocolo Queima Metabólica
           </Typography>
-          <Typography
+          {isCalculator && <Typography
             style={{ display: "flex", justifyContent: "center" }}
             variant="h4"
             gutterBottom
           >
-            CALCULADORA TDEE + MACROS
-          </Typography>
-          <div>
+            Coloque seus dados abaixo para que nossa equipe monte o seu protocolo personalizado
+          </Typography>}
+          {isBarProgress && <Typography
+            style={{ display: "flex", justifyContent: "center" }}
+            variant="h4"
+            gutterBottom
+          >
+            Nossa equipe já está montando o seu protocolo...
+          </Typography>}
+          <div> 
             <form
               onSubmit={handleSubmit}
               style={{
                 display: "flex",
                 justifyContent: "center",
+                alignItems:"center",
                 background: "#f0f0f0",
-                minHeight: "600px",
+                minHeight: "400px",
                 minWidth: "300px"
               }}
             >
@@ -92,7 +129,8 @@ export default function App() {
                 <div
                   style={{
                     display: "flex",
-                    flexDirection: "column"
+                    flexDirection: "column",
+                    marginTop:"5%"
                     //minWidth: "70%"
                   }}
                 >
@@ -106,7 +144,7 @@ export default function App() {
                       padding: "0px 30px"
                     }}
                   >
-                    <div style={{ minWidth: "220px" }}>
+                    <div style={{ minWidth: "220px", marginTop:"10px" }}>
                       <FormControl 
                       fullWidth
                       >
@@ -184,10 +222,10 @@ export default function App() {
                       padding: "0px 30px"
                     }}
                   >
-                    <div style={{ minWidth: "220px" }}>
+                    <div style={{ minWidth: "220px", maxWidth:"220px" }}>
                       <FormControl
                         fullWidth
-                        style={{ marginRight: "25px", marginBottom: "15px" }}
+                        style={{ marginRight: "25px", marginBottom: "15px", textOverflow: 'ellipsis' }}
                         variant="outlined"
                       >
                         <TextField
@@ -197,8 +235,9 @@ export default function App() {
                           select
                           label="Objetivo"
                         >
-                          <MenuItem value="masculino">Masculino</MenuItem>
-                          <MenuItem value="feminino">Feminino</MenuItem>
+                          <MenuItem value="emagrecerM">Emagrecer moderadamente</MenuItem>
+                          <MenuItem value="emagrecerR">Emagrecer rápido</MenuItem>
+                          <MenuItem value="emagrecerSR">Emagrecer super-rápido</MenuItem>
                         </TextField>
                       </FormControl>
                     </div>
@@ -217,6 +256,15 @@ export default function App() {
                           <MenuItem value="Levemente Ativo">
                             Levemente Ativo
                           </MenuItem>
+                          <MenuItem value="Moderadamente Ativo">
+                            Moderadamente Ativo
+                          </MenuItem>
+                          <MenuItem value="Muito Ativo">
+                            Muito Ativo
+                          </MenuItem>
+                          <MenuItem value="Extremamente Ativo">
+                            Extremamente Ativo
+                          </MenuItem>
                         </TextField>
                       </FormControl>
                     </div>
@@ -232,6 +280,9 @@ export default function App() {
                     >
                       Gerar Protocolo
                     </Button>
+                    <span style={{color: 'red'}}>
+                      {comment}
+                    </span>
                   </div>
                 </div>
               )}
@@ -247,37 +298,39 @@ export default function App() {
     return (
       <>
         <Typography
-          variant="h2"
+          variant="h6"
           style={{
             display: "flex",
             justifyContent: "center",
-            textAlign: "center"
+            textAlign: "center",
+            height: "140px",         
           }}
           gutterBottom
         >
-          Dieta Flexível
+          <img src={logo}/>
         </Typography>
         <div
           style={{
             display: "flex",
+            flexDirection:"column",
             justifyContent: "center",
-            background: "#f0f0f0",
-            minHeight: "300px",
-            marginLeft: "10%",
-            width: "80%"
+            alignItems:"center",
           }}
         >
-          <div style={{ marginLeft: "10%", width: "80%" }}>
+          <div style={{ display: "flex", flexDirection:"column",
+            justifyContent: "center",
+            alignItems:"center",  background: "#f0f0f0", maxWidth:"65%", minHeight:"400px" }}>
             <Typography
               variant="h5"
               style={{
                 display: "flex",
                 justifyContent: "center",
-                marginTop: "30px"
+                marginTop: "30px",
+                marginLeft:"5%"
               }}
               gutterBottom
             >
-              Você precisa de {calculateTDEE()} calorias para manter seu Peso
+              Você precisa de {calculateTDEE()} calorias
             </Typography>
             <div
               style={{
@@ -356,8 +409,8 @@ export default function App() {
                   marginBottom: "30px"
                 }}
               >
-                <Typography variant="h4" gutterBottom>
-                  O seu resultado já está na área de membros!
+                <Typography variant="h6" gutterBottom>
+                O seu protocolo já está pronto e disponível na área de membros. Pesquise na caixa de entrada do e-mail que você cadastrou por "Kiwify", que acabamos de enviar o seu acesso para esse e-mail. Comece agora mesmo a transformar o seu corpo em uma verdadeira máquina de queimar gordura!
                 </Typography>
               </div>
             </div>
