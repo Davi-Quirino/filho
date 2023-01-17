@@ -26,27 +26,27 @@ export default function App() {
   const calculateTaxa = () => {
     if(weight === undefined || height === undefined || age === undefined) return 
     if (gender === "male") {
-      return (66 + 13.8 * weight + 5 * height - 6.8 * age).toFixed(0);
+      return (66 + 13.8 * weight + 5 * height - 6.8 * age).toFixed(0).toString() + " Calorias";
     } else {
-      return (665 + 9.6 * weight + 1.8 * height - 4.7 * age).toFixed(0);
+      return (665 + 9.6 * weight + 1.8 * height - 4.7 * age).toFixed(0).toString() + " Calorias";
     }
   };
 
   const calculateIMC = () => {
     if(weight === undefined || height === undefined) return 
-    return ((weight / (height * height)) * 10000).toFixed(1);
+    return ((weight / (height * height)) * 10000).toFixed(1).toString();
   };
 
   const calculatePesoIdeal = () => {
     if(height === undefined) return
     //PI = IMC desejado x (Altura x Altura)
-    return ((23 * (height * height)) / 10000).toFixed(2);
+    return ((23 * (height * height)) / 10000).toFixed(2).toString() + "Kg";
   };
   const calculateTDEE = () => {
     if(weight === undefined || height === undefined || age === undefined) return 
     //TMB = 10 * (peso) + 6.25 * (altura) – 5 * (idade) – 161
     //TDEE = TMB * nível de atividade física
-    return ((10 * weight + 6.25 * height - 5 * age) * 1.375).toFixed(0);
+    return ((10 * weight + 6.25 * height - 5 * age) * 1.375).toFixed(0).toString() + " Calorias";
   };
 
   if (isCalculator || isBarProgress) {
@@ -336,7 +336,7 @@ export default function App() {
               }}
               gutterBottom
             >
-              Você precisa de {calculateTDEE()} calorias
+              Você precisa de {calculateTDEE()}
             </Typography>
             <div
               style={{
@@ -357,7 +357,7 @@ export default function App() {
                 <div style={{ minWidth: "80px" }}>
                   <TextField
                     label="Taxa Metabólica Basal"
-                    type="number"
+                    type="string"
                     value={calculateTaxa()}
                     onChange={(event) => setHeight(event.target.value as any)}
                     variant="outlined"
@@ -371,7 +371,7 @@ export default function App() {
                 <div style={{ minWidth: "80px" }}>
                   <TextField
                     label="TDEE"
-                    type="number"
+                    type="string"
                     value={calculateTDEE()}
                     onChange={(event) => setAge(event.target.value as any)}
                     disabled={true}
@@ -385,7 +385,7 @@ export default function App() {
                 <div style={{ minWidth: "80px" }}>
                   <TextField
                     label="IMC"
-                    type="number"
+                    type="string"
                     value={calculateIMC()}
                     onChange={(event) => setAge(event.target.value as any)}
                     disabled={true}
@@ -398,7 +398,7 @@ export default function App() {
                 <div style={{ minWidth: "80px" }}>
                   <TextField
                     label="Peso Ideal"
-                    type="number"
+                    type="string"
                     value={calculatePesoIdeal()}
                     onChange={(event) => setAge(event.target.value as any)}
                     disabled={true}
