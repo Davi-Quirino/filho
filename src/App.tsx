@@ -87,7 +87,7 @@ export default function App() {
           variant="h6"
           style={{
             display: "flex",
-            height: "150px",        
+            height: "180px",        
           }}
           gutterBottom
         >
@@ -95,21 +95,21 @@ export default function App() {
         </Typography>
           <Typography
             style={{ display: "flex", justifyContent: "center" }}
-            variant="h6"
+            variant="h5"
             gutterBottom
           >
             Parabéns pela decisão de entrar para o Protocolo Queima Metabólica
           </Typography>
           {isCalculator && <Typography
             style={{ display: "flex", justifyContent: "center" }}
-            variant="h5"
+            variant="h6"
             gutterBottom
           >
-            Coloque seus dados abaixo para que nossa equipe monte o seu protocolo personalizado
+            Coloque seus dados abaixo para nossa equipe montar o seu Protocolo
           </Typography>}
           {isBarProgress && <Typography
             style={{ display: "flex", justifyContent: "center" }}
-            variant="h5"
+            variant="h6"
             gutterBottom
           >
             Nossa equipe já está montando o seu protocolo...
@@ -327,7 +327,7 @@ export default function App() {
                         maxWidth:"700px",
                         minHeight:"400px" }}>
             <Typography
-              variant="h5"
+              variant="h6"
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -416,7 +416,7 @@ export default function App() {
               >
                   <img src={done} style={{width:"80px"}}/>
                 <Typography variant="h6" gutterBottom>
-                O seu protocolo já está pronto e disponível na área de membros. Pesquise na caixa de entrada do e-mail que você cadastrou por "Kiwify", que acabamos de enviar o seu acesso para esse e-mail. Comece agora mesmo a transformar o seu corpo em uma verdadeira máquina de queimar gordura!
+                O seu Protocolo já está pronto te esperando na área de membros. Acabamos de enviar o seu acesso para o e-mail cadastrado (se não encontrá-lo, pesquise por “Kiwify”). Estamos ansiosos para ouvir a história da sua transformação.
                 </Typography>
               </div>
             </div>
