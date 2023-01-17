@@ -8,7 +8,7 @@ import "react-circular-progressbar/dist/styles.css";
 import ChangingProgressProvider from "./ChangingProgressProvider";
 
 const App = () => (
-  <div style={{ padding: "40px 40px 40px 40px" }}>
+  <div style={{ margin: "0px 100px 0px 100px" }}>
 
     <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
       {(percentage: any) => (

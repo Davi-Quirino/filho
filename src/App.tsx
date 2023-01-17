@@ -8,6 +8,7 @@ import {
   Button,
 } from "@material-ui/core";
 import logo from "./assets/logo.png"
+import done from "./assets/done.png"
 
 
 export default function App() {
@@ -94,21 +95,21 @@ export default function App() {
         </Typography>
           <Typography
             style={{ display: "flex", justifyContent: "center" }}
-            variant="h5"
+            variant="h6"
             gutterBottom
           >
             Parabéns pela decisão de entrar para o Protocolo Queima Metabólica
           </Typography>
           {isCalculator && <Typography
             style={{ display: "flex", justifyContent: "center" }}
-            variant="h4"
+            variant="h5"
             gutterBottom
           >
             Coloque seus dados abaixo para que nossa equipe monte o seu protocolo personalizado
           </Typography>}
           {isBarProgress && <Typography
             style={{ display: "flex", justifyContent: "center" }}
-            variant="h4"
+            variant="h5"
             gutterBottom
           >
             Nossa equipe já está montando o seu protocolo...
@@ -317,9 +318,14 @@ export default function App() {
             alignItems:"center",
           }}
         >
-          <div style={{ display: "flex", flexDirection:"column",
-            justifyContent: "center",
-            alignItems:"center",  background: "#f0f0f0", maxWidth:"65%", minHeight:"400px" }}>
+          <div style={{ display: "flex", 
+                        flexDirection:"column",
+                        justifyContent: "center",
+                        alignItems:"center", 
+                        background: "#f0f0f0",
+                        minWidth:"300px",
+                        maxWidth:"700px",
+                        minHeight:"400px" }}>
             <Typography
               variant="h5"
               style={{
@@ -404,11 +410,11 @@ export default function App() {
               </div>
               <div
                 style={{
-                  display: "flex",
                   textAlign: "center",
                   marginBottom: "30px"
                 }}
               >
+                  <img src={done} style={{width:"80px"}}/>
                 <Typography variant="h6" gutterBottom>
                 O seu protocolo já está pronto e disponível na área de membros. Pesquise na caixa de entrada do e-mail que você cadastrou por "Kiwify", que acabamos de enviar o seu acesso para esse e-mail. Comece agora mesmo a transformar o seu corpo em uma verdadeira máquina de queimar gordura!
                 </Typography>
