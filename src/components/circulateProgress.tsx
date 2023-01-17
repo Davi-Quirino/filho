@@ -9,7 +9,6 @@ import ChangingProgressProvider from "./ChangingProgressProvider";
 
 const App = () => (
   <div style={{ padding: "40px 40px 40px 40px" }}>
-    <h2>Calculando o seus valores....</h2>
 
     <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
       {(percentage: any) => (
