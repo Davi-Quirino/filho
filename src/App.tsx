@@ -132,7 +132,6 @@ export default function App() {
                     display: "flex",
                     flexDirection: "column",
                     marginTop:"5%"
-                    //minWidth: "70%"
                   }}
                 >
                   <div
@@ -304,7 +303,7 @@ export default function App() {
             display: "flex",
             justifyContent: "center",
             textAlign: "center",
-            height: "140px",         
+            height: "180px",         
           }}
           gutterBottom
         >
