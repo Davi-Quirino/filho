@@ -20,9 +20,9 @@ export default function App() {
   const [age, setAge] = useState("");
   const [goal, setGoal] = useState("");
   const [active, setActive] = useState("");
-  const [isCalculator, setIsCalculator] = useState(true);
+  const [isCalculator, setIsCalculator] = useState(false);
   const [isBarProgress, setIsBarProgress] = useState(false);
-  const [IsResult, setIsResult] = useState(false);
+  const [IsResult, setIsResult] = useState(true);
   const [comment, setComment] = useState("")
 
   // const calculateTaxa = () => {
@@ -376,7 +376,8 @@ export default function App() {
                 <Typography variant="h6" gutterBottom>
                   Qualquer dúvida, me chame no whatsapp:
                 </Typography>
-                <img src={whatsapp} style={{width:"80px"}}/>
+
+                <a href={`https://wa.me/5538999843095/?text=Acabei de adquirir a Plataforma Aprendizagem Alpha e estou com dúvidas no acesso`}><img src={whatsapp} style={{width:"80px"}}/></a>
               </div>
             </div>
           </div>
