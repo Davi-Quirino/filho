@@ -9,11 +9,13 @@ import {
 } from "@material-ui/core";
 import logo from "./assets/logo.png"
 import done from "./assets/done.png"
+import whatsapp from "./assets/whatsapp.gif"
+import kids from "./assets/kids.gif"
 
 
 export default function App() {
   const [gender, setGender] = useState("");
-  const [weight, setWeight] = useState();
+  const [escola, setEscola] = useState();
   const [height, setHeight] = useState();
   const [age, setAge] = useState();
   const [goal, setGoal] = useState("");
@@ -24,17 +26,17 @@ export default function App() {
   const [comment, setComment] = useState("")
 
   const calculateTaxa = () => {
-    if(weight === undefined || height === undefined || age === undefined) return 
+    if(escola === undefined || height === undefined || age === undefined) return 
     if (gender === "male") {
-      return (66 + 13.8 * weight + 5 * height - 6.8 * age).toFixed(0).toString() + " Calorias";
+      return (66 + 13.8 * escola + 5 * height - 6.8 * age).toFixed(0).toString() + " Calorias";
     } else {
-      return (665 + 9.6 * weight + 1.8 * height - 4.7 * age).toFixed(0).toString() + " Calorias";
+      return (665 + 9.6 * escola + 1.8 * height - 4.7 * age).toFixed(0).toString() + " Calorias";
     }
   };
 
   const calculateIMC = () => {
-    if(weight === undefined || height === undefined) return 
-    return ((weight / (height * height)) * 10000).toFixed(1).toString();
+    if(escola === undefined || height === undefined) return 
+    return ((escola / (height * height)) * 10000).toFixed(1).toString();
   };
 
   const calculatePesoIdeal = () => {
@@ -43,10 +45,10 @@ export default function App() {
     return ((23 * (height * height)) / 10000).toFixed(2).toString() + "Kg";
   };
   const calculateTDEE = () => {
-    if(weight === undefined || height === undefined || age === undefined) return 
+    if(escola === undefined || height === undefined || age === undefined) return 
     //TMB = 10 * (peso) + 6.25 * (altura) – 5 * (idade) – 161
     //TDEE = TMB * nível de atividade física
-    return ((10 * weight + 6.25 * height - 5 * age) * 1.375).toFixed(0).toString() + " Calorias";
+    return ((10 * escola + 6.25 * height - 5 * age) * 1.375).toFixed(0).toString() + " Calorias";
   };
 
   if (isCalculator || isBarProgress) {
@@ -56,7 +58,7 @@ export default function App() {
         setComment("Você precisa colocar o seu gênero")
         return
       }
-      if(!weight || weight <= 0 ) {
+      if(!escola || escola <= 0 ) {
         setComment("Você precisa colocar o seu peso")
         return
       }
@@ -98,21 +100,21 @@ export default function App() {
             variant="h5"
             gutterBottom
           >
-            Parabéns pela decisão de entrar para o Protocolo Queima Metabólica
+            Meus parabéns! Seja muito bem-vinda à Plataforma Aprendizagem Alpha.
           </Typography>
           {isCalculator && <Typography
             style={{ display: "flex", justifyContent: "center" }}
             variant="h6"
             gutterBottom
           >
-            Coloque seus dados abaixo para nossa equipe montar o seu Protocolo
+            Preencha o formulário abaixo para que possamos personalizar a plataforma de acordo com o seu filho!
           </Typography>}
           {isBarProgress && <Typography
             style={{ display: "flex", justifyContent: "center" }}
             variant="h6"
             gutterBottom
           >
-            Nossa equipe já está montando o seu protocolo...
+            Nossa equipe já está montando a sua plataforma...
           </Typography>}
           <div> 
             <form
@@ -141,39 +143,43 @@ export default function App() {
                       flexWrap: "wrap",
                       gap: "10px",
                       justifyContent: "center",
-                      padding: "0px 30px"
+                      padding: "0px 30px",
+                      marginBottom:"20px"
                     }}
                   >
-                    <div style={{ minWidth: "220px", marginTop:"10px" }}>
-                      <FormControl 
-                      fullWidth
-                      >
+                  <div style={{display:"flex", flexDirection:"column", minWidth: "220px", alignItems:"center"}}>
+                      <div style={{fontSize:"12px"}}><strong>Idade da criança</strong></div>
+                      <div style={{ marginTop: "-10px", width:"260px" }}>
                         <TextField
+                          label="Idade"
+                          type="text"
+                          value={escola}
+                          onChange={(event) => setEscola(event.target.value as any)}
                           variant="outlined"
-                          value={gender }
-                          onChange={(event) => setGender(event.target.value as any)}
-                          select
-                          label="Gênero"
-                        >
-                          <MenuItem value="male">Masculino</MenuItem>
-                          <MenuItem value="female">Feminino</MenuItem>
-                        </TextField>
-                      </FormControl>
+                          margin="normal"
+                          required
+                          fullWidth
+                        />
+                      </div>
                     </div>
 
-                    <div style={{ minWidth: "220px" }}>
-                      <TextField
-                        label="Peso (kg)"
-                        type="number"
-                        value={weight}
-                        onChange={(event) => setWeight(event.target.value as any)}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                      />
+                  <div style={{display:"flex", flexDirection:"column", minWidth: "220px", alignItems:"center"}}>
+                      <div><strong>Já está na escola? Se sim, qual ano?</strong></div>
+                      <div style={{ marginTop: "-10px", width:"260px"  }}>
+                        <TextField
+                          label="Ano escolar "
+                          type="text"
+                          value={escola}
+                          onChange={(event) => setEscola(event.target.value as any)}
+                          variant="outlined"
+                          margin="normal"
+                          required
+                          fullWidth
+                        />
+                      </div>
                     </div>
-                  </div>
+
+                    </div>
 
                   <div
                     style={{
@@ -185,24 +191,28 @@ export default function App() {
                       padding: "0px 30px"
                     }}
                   >
-                    <div style={{ minWidth: "220px" }}>
+                   <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center"}}>
+                      <div style={{fontSize:"12px"}}><strong>Quanto tempo por dia você passa com seu filho em casa?</strong></div>
+                    <div style={{ marginTop: "-10px", width:"260px"  }}>
                       <TextField
-                        label="Altura (cm)"
-                        type="number"
+                        label="Tempo com filho"
+                        type="text"
                         value={height}
                         onChange={(event) => setHeight(event.target.value as any)}
                         variant="outlined"
                         margin="normal"
                         fullWidth
                         required
-                        //style={{ marginRight: "25px" }}
                       />
+                      </div>
                     </div>
 
-                    <div style={{ minWidth: "220px" }}>
+                    <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center", marginTop:"auto"}}>
+                      <div><strong>Principal dificuldade do seu filho</strong></div>
+                    <div style={{ marginTop: "-10px", width:"260px"  }}>
                       <TextField
-                        label="Idade"
-                        type="number"
+                        label="Dificuldades"
+                        type="text"
                         value={age}
                         onChange={(event) => setAge(event.target.value as any)}
                         variant="outlined"
@@ -211,6 +221,7 @@ export default function App() {
                         fullWidth
                       />
                     </div>
+                    </div>
                   </div>
                   <div
                     style={{
@@ -222,7 +233,9 @@ export default function App() {
                       padding: "0px 30px"
                     }}
                   >
-                    <div style={{ minWidth: "220px", maxWidth:"220px" }}>
+                  <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center"}}>
+                      <div style={{marginBottom:"20px"}}><strong>Seu filho apresenta algum dos transtornos abaixo?</strong></div>
+                    <div style={{ marginTop: "-10px", width:"260px" }}>
                       <FormControl
                         fullWidth
                         style={{ marginRight: "25px", marginBottom: "15px", textOverflow: 'ellipsis' }}
@@ -233,40 +246,45 @@ export default function App() {
                           value={goal}
                           onChange={(event) => setGoal(event.target.value)}
                           select
-                          label="Objetivo"
+                          label="Transtornos"
                         >
-                          <MenuItem value="emagrecerM">Emagrecer moderadamente</MenuItem>
-                          <MenuItem value="emagrecerR">Emagrecer rápido</MenuItem>
-                          <MenuItem value="emagrecerSR">Emagrecer super-rápido</MenuItem>
+                          <MenuItem value="TDA">TDA</MenuItem>
+                          <MenuItem value="TDAH">TDAH</MenuItem>
+                          <MenuItem value="Autismo">Autismo</MenuItem>
+                          <MenuItem value="Dislexia">Dislexia</MenuItem>
+                          <MenuItem value="TOD">TOD</MenuItem>
+                          <MenuItem value="Nenhum">Nenhum</MenuItem>
                         </TextField>
                       </FormControl>
+                      </div>
                     </div>
 
-                    <div style={{ minWidth: "220px" }}>
+                    <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center"}}>
+                      <div style={{marginBottom:"20px"}}><strong>O que você quer mais ver na plataforma</strong></div>
+                    <div style={{ marginTop: "-10px", width:"260px", textOverflow: 'ellipsis'  }}>
                       <FormControl fullWidth variant="outlined">
                       <TextField
                           variant="outlined"
                           value={active}
                           onChange={(event) => setActive(event.target.value as any)}
                           select
-                          label="Nível de Atividade Física"
+                          label="Ver na Plataforma"
                         >
-        
-                          <MenuItem value="Sedentário">Sedentário</MenuItem>
-                          <MenuItem value="Levemente Ativo">
-                            Levemente Ativo
+                          <MenuItem value="Atividades Práticas">
+                          Atividades Práticas
                           </MenuItem>
-                          <MenuItem value="Moderadamente Ativo">
-                            Moderadamente Ativo
+                          <MenuItem value="Aplicativos Educativos">
+                          Aplicativos Educativos
                           </MenuItem>
-                          <MenuItem value="Muito Ativo">
-                            Muito Ativo
+                          <MenuItem value="Aulas">
+                            Aulas
                           </MenuItem>
-                          <MenuItem value="Extremamente Ativo">
-                            Extremamente Ativo
+                          <MenuItem value="Apostilas">
+                            Apostilas
                           </MenuItem>
                         </TextField>
                       </FormControl>
+                      </div>
                     </div>
                     <Button
                       variant="contained"
@@ -325,102 +343,30 @@ export default function App() {
                         minWidth:"300px",
                         maxWidth:"700px",
                         minHeight:"400px" }}>
-            <Typography
-              variant="h6"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "30px",
-                marginLeft:"5%"
-              }}
-              gutterBottom
-            >
-              Você precisa de {calculateTDEE()}
-            </Typography>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "90%"
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  marginBottom: "20px",
-                  flexWrap: "wrap",
-                  gap: "10px",
-                  justifyContent: "center"
-                }}
-              >
-                <div style={{ minWidth: "80px" }}>
-                  <TextField
-                    label="Taxa Metabólica Basal"
-                    type="string"
-                    value={calculateTaxa()}
-                    onChange={(event) => setHeight(event.target.value as any)}
-                    variant="outlined"
-                    margin="normal"
-                    disabled={true}
-                    fullWidth
-                    //style={{ marginRight: "25px" }}
-                  />
-                </div>
-
-                <div style={{ minWidth: "80px" }}>
-                  <TextField
-                    label="TDEE"
-                    type="string"
-                    value={calculateTDEE()}
-                    onChange={(event) => setAge(event.target.value as any)}
-                    disabled={true}
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    //style={{ marginRight: "25px" }}
-                  />
-                </div>
-
-                <div style={{ minWidth: "80px" }}>
-                  <TextField
-                    label="IMC"
-                    type="string"
-                    value={calculateIMC()}
-                    onChange={(event) => setAge(event.target.value as any)}
-                    disabled={true}
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    //style={{ marginRight: "25px" }}
-                  />
-                </div>
-                <div style={{ minWidth: "80px" }}>
-                  <TextField
-                    label="Peso Ideal"
-                    type="string"
-                    value={calculatePesoIdeal()}
-                    onChange={(event) => setAge(event.target.value as any)}
-                    disabled={true}
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                  />
-                </div>
-              </div>
+            
               <div
                 style={{
                   textAlign: "center",
-                  marginBottom: "30px"
+                  marginBottom: "30px",
                 }}
               >
+                <div style={{display:"flex",
+                  flexDirection:"column", justifyContent:"center", marginTop:"20px"}}>
                   <img src={done} style={{width:"80px"}}/>
+                  <img src={kids} style={{width:"180px"}}/>
+
+                </div>
                 <Typography variant="h6" gutterBottom>
-                O seu Protocolo já está pronto te esperando na área de membros. Acabamos de enviar o seu acesso para o e-mail cadastrado (se não encontrá-lo, pesquise por “Kiwify”). Estamos ansiosos para ouvir a história da sua transformação.
+                Pronto! Já montamos a plataforma de acordo com suas respostas.
+                  Acabamos de enviar o acesso para seu e-mail.
                 </Typography>
+                <Typography variant="h6" gutterBottom>
+                  Qualquer dúvida, me chame no whatsapp:
+                </Typography>
+                <img src={whatsapp} style={{width:"80px"}}/>
               </div>
             </div>
           </div>
-        </div>
       </>
     );
   }
