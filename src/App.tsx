@@ -366,17 +366,17 @@ export default function App() {
                 <div style={{display:"flex",
                   flexDirection:"column", justifyContent:"center", marginTop:"20px", alignItems:"center"}}>
                   <img src={done} style={{width:"80px"}}/>
-                  <img src={kids} style={{width:"180px"}}/>
 
+                  <img src={kids} style={{width:"180px"}}/>
                 </div>
                 <Typography style={{width:"99%"}} variant="h6" gutterBottom>
                 Pronto! Já montamos a plataforma de acordo com suas respostas.
                   Acabamos de enviar o acesso para seu e-mail.
                 </Typography>
-                <Typography variant="h6" gutterBottom>
+                {/* <Typography variant="h6" gutterBottom>
                   Qualquer dúvida, me chame no whatsapp:
                 </Typography>
-                <img src={whatsapp} style={{width:"80px"}}/>
+                <img src={whatsapp} style={{width:"80px"}}/> */}
 
                 {/* <a href={`https://wa.me/5538999843095/?text=Acabei de adquirir a Plataforma Aprendizagem Alpha e estou com dúvidas no acesso`}><img src={whatsapp} style={{width:"80px"}}/></a> */}
               </div>
