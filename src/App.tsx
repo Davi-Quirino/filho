@@ -14,10 +14,10 @@ import kids from "./assets/kids.gif"
 
 
 export default function App() {
-  const [gender, setGender] = useState("");
-  const [escola, setEscola] = useState();
-  const [height, setHeight] = useState();
-  const [age, setAge] = useState();
+  const [idade, setIdade] = useState("");
+  const [escola, setEscola] = useState("");
+  const [height, setHeight] = useState("");
+  const [age, setAge] = useState("");
   const [goal, setGoal] = useState("");
   const [active, setActive] = useState("");
   const [isCalculator, setIsCalculator] = useState(true);
@@ -25,49 +25,57 @@ export default function App() {
   const [IsResult, setIsResult] = useState(false);
   const [comment, setComment] = useState("")
 
-  const calculateTaxa = () => {
-    if(escola === undefined || height === undefined || age === undefined) return 
-    if (gender === "male") {
-      return (66 + 13.8 * escola + 5 * height - 6.8 * age).toFixed(0).toString() + " Calorias";
-    } else {
-      return (665 + 9.6 * escola + 1.8 * height - 4.7 * age).toFixed(0).toString() + " Calorias";
-    }
-  };
+  // const calculateTaxa = () => {
+  //   if(escola === undefined || height === undefined || age === undefined) return 
+  //   if (idade === "male") {
+  //     return (66 + 13.8 * escola + 5 * height - 6.8 * age).toFixed(0).toString() + " Calorias";
+  //   } else {
+  //     return (665 + 9.6 * escola + 1.8 * height - 4.7 * age).toFixed(0).toString() + " Calorias";
+  //   }
+  // };
 
-  const calculateIMC = () => {
-    if(escola === undefined || height === undefined) return 
-    return ((escola / (height * height)) * 10000).toFixed(1).toString();
-  };
+  // const calculateIMC = () => {
+  //   if(escola === undefined || height === undefined) return 
+  //   return ((escola / (height * height)) * 10000).toFixed(1).toString();
+  // };
 
-  const calculatePesoIdeal = () => {
-    if(height === undefined) return
-    //PI = IMC desejado x (Altura x Altura)
-    return ((23 * (height * height)) / 10000).toFixed(2).toString() + "Kg";
-  };
-  const calculateTDEE = () => {
-    if(escola === undefined || height === undefined || age === undefined) return 
-    //TMB = 10 * (peso) + 6.25 * (altura) – 5 * (idade) – 161
-    //TDEE = TMB * nível de atividade física
-    return ((10 * escola + 6.25 * height - 5 * age) * 1.375).toFixed(0).toString() + " Calorias";
-  };
+  // const calculatePesoIdeal = () => {
+  //   if(height === undefined) return
+  //   //PI = IMC desejado x (Altura x Altura)
+  //   return ((23 * (height * height)) / 10000).toFixed(2).toString() + "Kg";
+  // };
+  // const calculateTDEE = () => {
+  //   if(escola === undefined || height === undefined || age === undefined) return 
+  //   //TMB = 10 * (peso) + 6.25 * (altura) – 5 * (idade) – 161
+  //   //TDEE = TMB * nível de atividade física
+  //   return ((10 * escola + 6.25 * height - 5 * age) * 1.375).toFixed(0).toString() + " Calorias";
+  // };
 
   if (isCalculator || isBarProgress) {
     const handleSubmit = (event: any) => {
       event.preventDefault();
-      if(gender === "") {
-        setComment("Você precisa colocar o seu gênero")
+      if(idade === "") {
+        setComment("Você precisa colocar a idade do seu filho")
         return
       }
-      if(!escola || escola <= 0 ) {
-        setComment("Você precisa colocar o seu peso")
+      if(escola === "" ) {
+        setComment("Você precisa colocar se o seu filho está na escola")
         return
       }
-      if(!height || height <= 0) {
-        setComment("Você precisa colocar a sua altura")
+      if(height === "") {
+        setComment("Você precisa colocar quanto tempo passa com seu filho")
         return
       }
-      if(!age || age <= 0) {
-        setComment("Você precisa colocar a sua idade")
+      if(age === "") {
+        setComment("Você precisa colocar a principal dificuldade do seu filho")
+        return
+      }
+      if(goal === "") {
+        setComment("Você precisa responder se o seu filho possui transtornos")
+        return
+      }
+      if(active === "") {
+        setComment("Você precisa responder o que quer ver na plataforma")
         return
       }
       setIsCalculator(false);
@@ -82,35 +90,38 @@ export default function App() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            textAlign: "center"
+            textAlign: "center",
+            backgroundColor:"#252531",
+            paddingBottom:"20%",
           }}
         >
         <Typography
           variant="h6"
           style={{
             display: "flex",
-            height: "180px",        
+            height: "180px",
+            alignItems:"center"        
           }}
           gutterBottom
         >
-          <img src={logo} alt="logo" style={{height:"100%"}}/>
+          <img src={logo} alt="logo" style={{height:"52%"}}/>
         </Typography>
           <Typography
-            style={{ display: "flex", justifyContent: "center" }}
+            style={{ display: "flex", justifyContent: "center", color:"#fff" }}
             variant="h5"
             gutterBottom
           >
             Meus parabéns! Seja muito bem-vinda à Plataforma Aprendizagem Alpha.
           </Typography>
           {isCalculator && <Typography
-            style={{ display: "flex", justifyContent: "center" }}
+            style={{ display: "flex", justifyContent: "center", color:"#fff" }}
             variant="h6"
             gutterBottom
           >
             Preencha o formulário abaixo para que possamos personalizar a plataforma de acordo com o seu filho!
           </Typography>}
           {isBarProgress && <Typography
-            style={{ display: "flex", justifyContent: "center" }}
+            style={{ display: "flex", justifyContent: "center", color:"#fff" }}
             variant="h6"
             gutterBottom
           >
@@ -147,14 +158,14 @@ export default function App() {
                       marginBottom:"20px"
                     }}
                   >
-                  <div style={{display:"flex", flexDirection:"column", minWidth: "220px", alignItems:"center"}}>
-                      <div style={{fontSize:"12px"}}><strong>Idade da criança</strong></div>
+                  <div style={{display:"flex", flexDirection:"column", minWidth: "220px", alignItems:"center", marginBottom:"10px"}}>
+                      <div><strong>Idade da criança</strong></div>
                       <div style={{ marginTop: "-10px", width:"260px" }}>
                         <TextField
                           label="Idade"
                           type="text"
-                          value={escola}
-                          onChange={(event) => setEscola(event.target.value as any)}
+                          value={idade}
+                          onChange={(event) => setIdade(event.target.value as any)}
                           variant="outlined"
                           margin="normal"
                           required
@@ -163,7 +174,7 @@ export default function App() {
                       </div>
                     </div>
 
-                  <div style={{display:"flex", flexDirection:"column", minWidth: "220px", alignItems:"center"}}>
+                  <div style={{display:"flex", flexDirection:"column", minWidth: "220px", alignItems:"center", marginBottom:"10px"}}>
                       <div><strong>Já está na escola? Se sim, qual ano?</strong></div>
                       <div style={{ marginTop: "-10px", width:"260px"  }}>
                         <TextField
@@ -173,7 +184,6 @@ export default function App() {
                           onChange={(event) => setEscola(event.target.value as any)}
                           variant="outlined"
                           margin="normal"
-                          required
                           fullWidth
                         />
                       </div>
@@ -191,8 +201,8 @@ export default function App() {
                       padding: "0px 30px"
                     }}
                   >
-                   <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center"}}>
-                      <div style={{fontSize:"12px"}}><strong>Quanto tempo por dia você passa com seu filho em casa?</strong></div>
+                   <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center", marginBottom:"10px"}}>
+                      <div><strong>Quanto tempo por dia você passa com seu filho em casa?</strong></div>
                     <div style={{ marginTop: "-10px", width:"260px"  }}>
                       <TextField
                         label="Tempo com filho"
@@ -207,7 +217,7 @@ export default function App() {
                       </div>
                     </div>
 
-                    <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center", marginTop:"auto"}}>
+                    <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center", marginTop:"auto", marginBottom:"10px"}}>
                       <div><strong>Principal dificuldade do seu filho</strong></div>
                     <div style={{ marginTop: "-10px", width:"260px"  }}>
                       <TextField
@@ -233,7 +243,7 @@ export default function App() {
                       padding: "0px 30px"
                     }}
                   >
-                  <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center"}}>
+                  <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center", marginBottom:"10px"}}>
                       <div style={{marginBottom:"20px"}}><strong>Seu filho apresenta algum dos transtornos abaixo?</strong></div>
                     <div style={{ marginTop: "-10px", width:"260px" }}>
                       <FormControl
@@ -259,7 +269,7 @@ export default function App() {
                       </div>
                     </div>
 
-                    <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center"}}>
+                    <div style={{display:"flex", flexDirection:"column", width:"260px" , alignItems:"center", marginBottom:"10px"}}>
                       <div style={{marginBottom:"20px"}}><strong>O que você quer mais ver na plataforma</strong></div>
                     <div style={{ marginTop: "-10px", width:"260px", textOverflow: 'ellipsis'  }}>
                       <FormControl fullWidth variant="outlined">
@@ -296,7 +306,7 @@ export default function App() {
                       }}
                       onClick={handleSubmit}
                     >
-                      Gerar Protocolo
+                      Montar Plataforma
                     </Button>
                     <span style={{color: 'red'}}>
                       {comment}
@@ -315,17 +325,20 @@ export default function App() {
   if (IsResult) {
     return (
       <>
+      <div style={{backgroundColor:"#252531", paddingBottom:"38%",}}>
         <Typography
           variant="h6"
           style={{
             display: "flex",
             justifyContent: "center",
             textAlign: "center",
-            height: "180px",         
+            height: "180px",   
+            backgroundColor:"#252531", 
+            alignItems:"center"     
           }}
           gutterBottom
         >
-          <img src={logo}/>
+          <img src={logo} style={{height:"52%"}}/>
         </Typography>
         <div
           style={{
@@ -351,12 +364,12 @@ export default function App() {
                 }}
               >
                 <div style={{display:"flex",
-                  flexDirection:"column", justifyContent:"center", marginTop:"20px"}}>
+                  flexDirection:"column", justifyContent:"center", marginTop:"20px", alignItems:"center"}}>
                   <img src={done} style={{width:"80px"}}/>
                   <img src={kids} style={{width:"180px"}}/>
 
                 </div>
-                <Typography variant="h6" gutterBottom>
+                <Typography style={{width:"99%"}} variant="h6" gutterBottom>
                 Pronto! Já montamos a plataforma de acordo com suas respostas.
                   Acabamos de enviar o acesso para seu e-mail.
                 </Typography>
@@ -366,6 +379,7 @@ export default function App() {
                 <img src={whatsapp} style={{width:"80px"}}/>
               </div>
             </div>
+          </div>
           </div>
       </>
     );
