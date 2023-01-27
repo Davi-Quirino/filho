@@ -20,9 +20,9 @@ export default function App() {
   const [age, setAge] = useState("");
   const [goal, setGoal] = useState("");
   const [active, setActive] = useState("");
-  const [isCalculator, setIsCalculator] = useState(false);
+  const [isCalculator, setIsCalculator] = useState(true);
   const [isBarProgress, setIsBarProgress] = useState(false);
-  const [IsResult, setIsResult] = useState(true);
+  const [IsResult, setIsResult] = useState(false);
   const [comment, setComment] = useState("")
 
   // const calculateTaxa = () => {
