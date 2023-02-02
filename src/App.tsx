@@ -374,7 +374,7 @@ export default function App() {
                   Acabamos de enviar o acesso para seu e-mail.
                 </Typography>
                 <Typography variant="h6" gutterBottom>
-                  Entre para a comunidade alunas  clicando no ícone abaixo:
+                  Entre para a comunidade DE ALUNAS clicando no ícone abaixo:
                 </Typography>
 
                 <a href={`https://chat.whatsapp.com/FhvQF1A2eiK5qhMLMjd79C`}><img src={whatsapp} style={{width:"80px"}}/></a>
