@@ -373,12 +373,11 @@ export default function App() {
                 Pronto! Já montamos a plataforma de acordo com suas respostas.
                   Acabamos de enviar o acesso para seu e-mail.
                 </Typography>
-                {/* <Typography variant="h6" gutterBottom>
-                  Qualquer dúvida, me chame no whatsapp:
+                <Typography variant="h6" gutterBottom>
+                  Entre para a comunidade alunas  clicando no ícone abaixo:
                 </Typography>
-                <img src={whatsapp} style={{width:"80px"}}/> */}
 
-                {/* <a href={`https://wa.me/5538999843095/?text=Acabei de adquirir a Plataforma Aprendizagem Alpha e estou com dúvidas no acesso`}><img src={whatsapp} style={{width:"80px"}}/></a> */}
+                <a href={`https://chat.whatsapp.com/FhvQF1A2eiK5qhMLMjd79C`}><img src={whatsapp} style={{width:"80px"}}/></a>
               </div>
             </div>
           </div>
